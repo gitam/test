@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/test
+    working_directory: ~/test/api_testing
     docker:
       - image: circleci/python:3.6.4
     steps:
