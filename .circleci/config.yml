@@ -1,13 +1,14 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/test/api_testing
+    working_directory: ~/test
     docker:
       - image: circleci/python:3.6.4
     steps:
       - checkout
       - run: ls
       - run: cd api_testing
+      - run: ls
       - run:
           command: |
             sudo pip3 install -r requirements.txt
