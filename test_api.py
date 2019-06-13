@@ -1,40 +1,98 @@
+#!/usr/bin/env python3
+import unittest
+from flask import json #request, jsonify, Flask, json
+from app import *
 
-from unittest import TestCase # unittest framewrok
-import pprint
-#import urllib3
-import spotipy
+class AppTestCase(unittest.TestCase):
+
+    # add user
+    @app.route('/user', methods=["POST"])
+    def test_adding_user(self):
+        print('--Testing user add')
+        with app.test_client() as c:
+            rv = c.post('/user', json={
+                "email": "myemail2@mail.com", "username": "another2"
+            })
+            json_data = rv.get_json()
+            print('JSON Sent:')
+            print(json_data)
+            response = app.response_class(
+                response=json.dumps(json_data),
+                status=200,
+                mimetype='application/json'
+            )
+            print(response.status)
+            assert response.status=='200 OK'
+
+    # show all users
+    @app.route("/user", methods=["GET"])
+    def test_getting_all_users(self):
+        print('--Testing getting all users')
+        with app.test_client() as c:
+            rv = c.get('/user')
+            json_data = rv.get_json()
+            print('JSON Sent:')
+            print(json_data)
+            response = app.response_class(
+                response=json.dumps(json_data),
+                status=200,
+                mimetype='application/json'
+            )
+            print(response.status)
+            assert response.status == '200 OK'
+
+    # get user by id
+    @app.route("/user/<id>", methods=["GET"])
+    def test_getting_user_detail_by_id(self):
+        print('--Testing getting user by id')
+        with app.test_client() as c:
+            rv = c.get('/user/1')
+            json_data = rv.get_json()
+            print('JSON Sent:')
+            print(json_data)
+            if json_data['username'] == 'another2' and json_data['email'] == 'myemail2@mail.com':
+                print('user details correct')
+                assert True
+            else:
+                assert False
+
+    # update user by id
+    @app.route("/user/<id>", methods=["PUT"])
+    def test_updating_user_by_id(self):
+        print('--Testing updating user by id')
+        with app.test_client() as c:
+            rv = c.put('/user/1', json={
+                "email": "myemail3@mail.com", "username": "another3"
+            })
+            json_data = rv.get_json()
+            print('JSON Sent:')
+            print(json_data)
+            response = app.response_class(
+                response=json.dumps(json_data),
+                status=200,
+                mimetype='application/json'
+            )
+            print(response.status)
+            assert response.status == '200 OK'
 
 
-class BaseSettings(TestCase):
-
-    creep_urn = 'spotify:track:3HfB5hBU0dmBt8T0iCmH42'
-    creep_id = '3HfB5hBU0dmBt8T0iCmH42'
-    creep_url = 'http://open.spotify.com/track/3HfB5hBU0dmBt8T0iCmH42'
-    el_scorcho_urn = 'spotify:track:0Svkvt5I79wficMFgaqEQJ'
-    el_scorcho_bad_urn = 'spotify:track:0Svkvt5I79wficMFgaqEQK'
-    pinkerton_urn = 'spotify:album:04xe676vyiTeYNXw15o9jT'
-    weezer_urn = 'spotify:artist:3jOstUTkEu2JkjvRdBA5Gu'
-    pablo_honey_urn = 'spotify:album:6AZv3m27uyRxi8KyJSfUxL'
-    radiohead_urn = 'spotify:artist:4Z8W4fKeB5YxbusRsdQVPb'
-    angeles_haydn_urn = 'spotify:album:1vAbqAeuJVWNAe7UR00bdM'
-
-    def setUp(self):
-        # install(level='DEBUG')
-        # cls.ApiURL = 'https://api.spotify.com/v1/search'
-        urn = 'spotify:artist:3jOstUTkEu2JkjvRdBA5Gu'
-        self.spotify = spotipy.Spotify()
-
-    # @staticmethod
-    # def test_opening_url(self):
-    #     http = urllib3.PoolManager()
-    #     r = http.request('GET', 'https://api.spotify.com/v1/search?q=tania%20bowra&type=artist')
-    #     print(r.status)
-    #     print(r.data)
-
-    def test_artist_urn(self):
-        artist = self.spotify.artist(self.radiohead_urn)
-        self.assertTrue(artist['name'] == 'Radiohead')
+    # endpoint to delete user
+    @app.route("/user/<id>", methods=["DELETE"])
+    def test_user_deletion_by_id(self):
+        print('--Testing deleting user by id')
+        with app.test_client() as c:
+            rv = c.delete('/user/1')
+            json_data = rv.get_json()
+            print('JSON Sent:')
+            print(json_data)
+            response = app.response_class(
+                response=json.dumps(json_data),
+                status=200,
+                mimetype='application/json'
+            )
+            print(response.status)
+            assert response.status == '200 OK'
 
 
 if __name__ == '__main__':
-    unittest.main()
+    app.run(debug=True)

@@ -34,8 +34,16 @@ users_schema = UserSchema(many=True)
 @app.route("/user", methods=["POST"])
 def add_user():
 
-    username = request.form['username']
-    email = request.form['email']
+    #if using json:
+    print(request.is_json)
+    content = request.get_json()
+    username = content["username"]
+    email = content["email"]
+
+    # If using form variables:
+    # username = request.form['username']
+    # email = request.form['email']
+
     print(username)
     print(email)
     new_user = User(username, email)
