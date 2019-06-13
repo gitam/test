@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build:
-#    working_directory: ~/circleci-demo-python-django
+    working_directory: ~/test
     docker:
       - image: circleci/python:3.6.4  # primary container for the build job
     steps:
