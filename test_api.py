@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import unittest
-from flask import json #request, jsonify, Flask, json
+from flask import json
 from app import *
 
 class AppTestCase(unittest.TestCase):
