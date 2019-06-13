@@ -8,6 +8,7 @@ To run tests use following command line:
 ```python3 -m unittest test_api```
 
 Pre-requesites for tests are **python3** and these libraries:
+
 ```pip3 install flask```
 
 ```pip3 install unittest```
