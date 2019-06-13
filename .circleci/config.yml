@@ -7,7 +7,7 @@ jobs:
     steps:
       - run:
           command: |
-            pip3 install -r requirments.txt
+            pip3 install -r requirements.txt
             pip3 install -e .
             sudo pip install pipenv
             pipenv install
