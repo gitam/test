@@ -1,1 +1,5 @@
 pytest==4.5.0
+flask
+unittest
+flaks_sqlalchemy
+flask_marshmallow
