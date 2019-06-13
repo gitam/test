@@ -14,8 +14,13 @@ jobs:
             sudo pip3 install -r requirements.txt
             sudo pip3 install flask_sqlalchemy
             sudo pip3 install flask_marshmallow
+            sudo pip3 install coverage
       - run:
           name: Running tests
           command: |
             cd api_testing
             python3 -m unittest test_api
+            coverage run -m unittest test_api
+            coverage html app.py
+      - store_artifacts:
+          path: htmlcov
