@@ -15,7 +15,7 @@ Pre-requesites for tests are **python3** and these libraries:
 
 ```pip3 install flask_sqlalchemy```
 
-```pip3 flask_marshmallow```
+```pip3 install flask_marshmallow```
 
 To generate sqlite db launch python interactive shell:
 
