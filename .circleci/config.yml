@@ -1,17 +1,18 @@
-version: 2
+version: 2.1
 jobs:
   build:
 #    working_directory: ~/circleci-demo-python-django
     docker:
       - image: circleci/python:3.6.4  # primary container for the build job
     steps:
-      - install:
-          - pip3 install -r requirments.txt
-          - pip3 install -e .
-          - sudo pip install pipenv
-          - pipenv install
+      - run:
+          command: |
+            pip3 install -r requirments.txt
+            pip3 install -e .
+            sudo pip install pipenv
+            pipenv install
       - run:
           name: Running tests
           command: |
             ls
-            python3 -m unittest test_api
+            pipenv run python3 -m unittest test_api
