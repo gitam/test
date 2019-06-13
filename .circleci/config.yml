@@ -10,11 +10,10 @@ jobs:
       - run:
           command: |
             pip3 install -r requirements.txt
-            pip3 install -e .
-            sudo pip3 install pipenv
-            pipenv install
+#            pip3 install -e .
+#            sudo pip3 install pipenv
+#            pipenv install
       - run:
           name: Running tests
           command: |
-            ls
-            pipenv run python3 -m unittest test_api
+            python3 -m unittest test_api
