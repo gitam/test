@@ -7,6 +7,7 @@ jobs:
     steps:
       - checkout
       - run: ls
+      - run: cd api_testing
       - run:
           command: |
             sudo pip3 install -r requirements.txt
