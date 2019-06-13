@@ -9,7 +9,7 @@ jobs:
       - run: ls
       - run:
           command: |
-            pip3 install -r requirements.txt
+            sudo pip3 install -r requirements.txt
 #            pip3 install -e .
 #            sudo pip3 install pipenv
 #            pipenv install
