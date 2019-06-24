@@ -1,0 +1,404 @@
+{
+	"info": {
+		"_postman_id": "a6f0f792-4edb-427b-99c8-67c630185d70",
+		"name": "POQ tests",
+		"description": "Various calls for misguided",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Refresh page (generate variable)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1fb0dd64-dd83-4d9d-aca5-f9c3662ae46d",
+						"exec": [
+							"pm.test(\"Title is sign up\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].title).to.eql(\"Sign Up Footer\");",
+							"});",
+							"",
+							"pm.globals.set(\"sequence\", Math.floor(Math.random() * 100));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://missguided.poq.io/pages/76/3519?refresh=1",
+					"protocol": "https",
+					"host": [
+						"missguided",
+						"poq",
+						"io"
+					],
+					"path": [
+						"pages",
+						"76",
+						"3519"
+					],
+					"query": [
+						{
+							"key": "refresh",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c15c55fe-aa46-4915-8b87-4203e5ae8d42",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.email).to.eql(\"eziite+\"+pm.variables.get(\"sequence\")+\"@gmail.com\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"isPromotion\": false,\n\t\"profile\": {\n\t\t\"lastName\": \"Two\",\n\t\t\"email\": \"eziite+{{sequence}}@gmail.com\",\n\t\t\"encryptedPassword\": \"test123\",\n\t\t\"isPromotion\": false,\n\t\t\"firstName\": \"Gita\"\n\t},\n\t\"credentials\": {\n\t\t\"username\": \"eziite+{{sequence}}@gmail.com\",\n\t\t\"password\": \"test123\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://missguided.poq.io/account/register/76/B6D5CD89-9613-4DCE-A635-4A9A1EAC0DC4",
+					"protocol": "https",
+					"host": [
+						"missguided",
+						"poq",
+						"io"
+					],
+					"path": [
+						"account",
+						"register",
+						"76",
+						"B6D5CD89-9613-4DCE-A635-4A9A1EAC0DC4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Unsuccessful",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d4c8ded-36a1-4c63-9a9e-343227a9476d",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"An account with this email address already exists.\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"isPromotion\": false,\n\t\"profile\": {\n\t\t\"lastName\": \"Two\",\n\t\t\"email\": \"eziite+{{sequence}}@gmail.com\",\n\t\t\"encryptedPassword\": \"test123\",\n\t\t\"isPromotion\": false,\n\t\t\"firstName\": \"Gita\"\n\t},\n\t\"credentials\": {\n\t\t\"username\": \"eziite+{{sequence}}@gmail.com\",\n\t\t\"password\": \"test123\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://missguided.poq.io/account/register/76/B6D5CD89-9613-4DCE-A635-4A9A1EAC0DC4",
+					"protocol": "https",
+					"host": [
+						"missguided",
+						"poq",
+						"io"
+					],
+					"path": [
+						"account",
+						"register",
+						"76",
+						"B6D5CD89-9613-4DCE-A635-4A9A1EAC0DC4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Negative login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f7c83f4-43a2-4996-baf1-4c3dd2825c43",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Login Failed: Wrong username or password\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"password\" : \"test\",\n  \"isMasterCard\" : false,\n  \"username\" : \"eziite+{{sequence}}@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "https://missguided.poq.io/account/login/76/A30A9728-770F-4550-A2E3-775B1E09F2B4",
+					"protocol": "https",
+					"host": [
+						"missguided",
+						"poq",
+						"io"
+					],
+					"path": [
+						"account",
+						"login",
+						"76",
+						"A30A9728-770F-4550-A2E3-775B1E09F2B4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "87a5d763-f7d7-4ebd-a89d-5fab1cbe3e97",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Authentication complete.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"password\" : \"test123\",\n  \"isMasterCard\" : false,\n  \"username\" : \"eziite+{{sequence}}@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "https://missguided.poq.io/account/login/76/A30A9728-770F-4550-A2E3-775B1E09F",
+					"protocol": "https",
+					"host": [
+						"missguided",
+						"poq",
+						"io"
+					],
+					"path": [
+						"account",
+						"login",
+						"76",
+						"A30A9728-770F-4550-A2E3-775B1E09F"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product details different client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c5fadd72-0646-4ebf-8390-7212152eee8a",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.statusCode).to.eql(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://missguided.poq.io/products/detail/1/4942363?externalId=1076833&poqUserId=1E99F9DD-2ADA-4405-8A84-9645B06E3868",
+					"protocol": "https",
+					"host": [
+						"missguided",
+						"poq",
+						"io"
+					],
+					"path": [
+						"products",
+						"detail",
+						"1",
+						"4942363"
+					],
+					"query": [
+						{
+							"key": "externalId",
+							"value": "1076833"
+						},
+						{
+							"key": "poqUserId",
+							"value": "1E99F9DD-2ADA-4405-8A84-9645B06E3868"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product details wrong product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f1ad61c-f7a9-4604-92c6-2f3ac18a5e68",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.statusCode).to.eql(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://missguided.poq.io/products/detail/76/90970979070979070977097?externalId=1076833&poqUserId=1E99F9DD-2ADA-4405-8A84-9645B06E3868",
+					"protocol": "https",
+					"host": [
+						"missguided",
+						"poq",
+						"io"
+					],
+					"path": [
+						"products",
+						"detail",
+						"76",
+						"90970979070979070977097"
+					],
+					"query": [
+						{
+							"key": "externalId",
+							"value": "1076833"
+						},
+						{
+							"key": "poqUserId",
+							"value": "1E99F9DD-2ADA-4405-8A84-9645B06E3868"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://missguided.poq.io/products/detail/76/4942363?externalId=1076833&poqUserId=1E99F9DD-2ADA-4405-8A84-9645B06E3868",
+					"protocol": "https",
+					"host": [
+						"missguided",
+						"poq",
+						"io"
+					],
+					"path": [
+						"products",
+						"detail",
+						"76",
+						"4942363"
+					],
+					"query": [
+						{
+							"key": "externalId",
+							"value": "1076833"
+						},
+						{
+							"key": "poqUserId",
+							"value": "1E99F9DD-2ADA-4405-8A84-9645B06E3868"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout / Delete wishlist",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://missguided.poq.io/wishlist/76/A30A9728-770F-4550-A2E3-775B1E09F2B4",
+					"protocol": "https",
+					"host": [
+						"missguided",
+						"poq",
+						"io"
+					],
+					"path": [
+						"wishlist",
+						"76",
+						"A30A9728-770F-4550-A2E3-775B1E09F2B4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
