@@ -1,8 +1,8 @@
 Testing playground contains following:
 
-* .circleci - for coverage reports (running API tests at the moment) [![CircleCI](https://circleci.com/gh/gitam/test.svg?style=svg)](https://circleci.com/gh/gitam/test)
+* .circleci - contains yml file to run CircleCI tests [![CircleCI](https://circleci.com/gh/gitam/test.svg?style=svg)](https://circleci.com/gh/gitam/test)
 * api_testing - sample api app & tests used in circle ci
-* htmlcov - coverage report for circleci
+* htmlcov - coverage report for circleci tests
 * missguided - example postman tests for missguided app
-* xcode - playground of building and iphone app
+* xcode - playground of building an iphone app
 
